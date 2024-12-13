@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cite</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css\" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .active-nav {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-gray-800 p-4 text-white flex justify-between items-center">
+        <div class="text-xl font-bold">Cite</div>
+        <div class="space-x-4">
+            <a href="#" class="hover:text-gray-300 active-nav px-3 py-2 rounded">Current Date</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Articles</h1>
+            <input type="text" id="date-picker" class="form-input rounded-md shadow-sm" placeholder="Select Date">
+        </div>
+
+        <div id="articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Articles will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const datePicker = flatpickr("#date-picker", {
+                dateFormat: "m.d.y",
+                defaultDate: new Date(),
+                maxDate: new Date()
+            });
+
+            const articlesContainer = document.getElementById('articles');
+
+            function loadArticles(date) {
+                const articles = {
+                    "12.13.24": [
+                        {
+                            title: "Tech Innovations of 2024",
+                            summary: "A look at groundbreaking technologies this year.",
+                            author: "Jane Doe"
+                        },
+                        {
+                            title: "Climate Change Progress",
+                            summary: "Global efforts and challenges in environmental sustainability.",
+                            author: "John Smith"
+                        },
+                        {
+                            title: "AI in Healthcare",
+                            summary: "How artificial intelligence is transforming medical treatments.",
+                            author: "Dr. Emily Roberts"
+                        },
+                        {
+                            title: "Space Exploration Milestones",
+                            summary: "Recent achievements in interstellar research.",
+                            author: "Alex Chang"
+                        }
+                    ]
+                };
+
+                articlesContainer.innerHTML = '';
+                const dateArticles = articles[date] || [];
+
+                dateArticles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow';
+                    articleElement.innerHTML = `
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">${article.title}</h2>
+                        <p class="text-gray-600 mb-4">${article.summary}</p>
+                        <div class="text-sm text-gray-500">By ${article.author}</div>
+                    `;
+                    articlesContainer.appendChild(articleElement);
+                });
+            }
+
+            // Load articles for current date by default
+            const currentDate = `${(new Date().getMonth() + 1).toString().padStart(2, '0')}.${new Date().getDate().toString().padStart(2, '0')}.${new Date().getFullYear().toString().slice(-2)}`;
+            loadArticles(currentDate);
+
+            datePicker.config.onChange.push((selectedDates, dateStr) => {
+                loadArticles(dateStr);
+            });
+        });
+    </script>
+</body>
+</html>
