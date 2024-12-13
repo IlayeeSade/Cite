@@ -1,1 +1,206 @@
-{artifact_content}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cite - Your Global Information Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .active-nav {
+            background-color: black;
+            color: white;
+        }
+        #articleModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: black;
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <nav class="bg-black p-4 text-white flex justify-between items-center">
+        <div class="text-xl font-bold">Cite</div>
+        <div class="space-x-4">
+            <a href="#" data-subject="home" class="hover:text-gray-300 active-nav px-3 py-2 rounded">Home</a>
+            <a href="#" data-subject="world-politics" class="hover:text-gray-300 px-3 py-2 rounded">World Politics</a>
+            <a href="#" data-subject="computer-science" class="hover:text-gray-300 px-3 py-2 rounded">Computer Science</a>
+            <a href="#" data-subject="ai" class="hover:text-gray-300 px-3 py-2 rounded">AI</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-white">Articles</h1>
+            <input type="text" id="date-picker" class="form-input rounded-md shadow-sm bg-gray-800 text-white" placeholder="Select Date">
+        </div>
+
+        <div id="content">
+            <section id="home" class="text-center">
+                <h1 class="text-4xl font-bold mb-4 text-white">Cite: Beyond the Headlines</h1>
+                <p class="text-xl text-gray-300">A curated platform transforming how you consume global information. We dive deep, providing context and insights across critical domains.</p>
+            </section>
+
+            <section id="world-politics" class="subject-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style="display:none;"></section>
+            <section id="computer-science" class="subject-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style="display:none;"></section>
+            <section id="ai" class="subject-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style="display:none;"></section>
+        </div>
+
+        <div id="articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Articles will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div id="articleModal">
+        <div class="modal-content">
+            <span class="close-modal text-white text-2xl">&times;</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <p id="modalSummary" class="text-gray-300 mb-4"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const datePicker = flatpickr("#date-picker", {
+                dateFormat: "m.d.y",
+                defaultDate: new Date(),
+                maxDate: new Date()
+            });
+
+            const articlesContainer = document.getElementById('articles');
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.subject-section');
+            const articleModal = document.getElementById('articleModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSummary = document.getElementById('modalSummary');
+            const closeModal = document.querySelector('.close-modal');
+
+            // Close modal when clicking the close button
+            closeModal.addEventListener('click', () => {
+                articleModal.style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            articleModal.addEventListener('click', (e) => {
+                if (e.target === articleModal) {
+                    articleModal.style.display = 'none';
+                }
+            });
+
+            // Navigation handling
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active-nav', 'bg-black', 'text-white'));
+                    
+                    // Add active class to clicked link
+                    e.target.classList.add('active-nav');
+
+                    // Hide all sections
+                    sections.forEach(section => section.style.display = 'none');
+                    
+                    // Show selected section
+                    const sectionToShow = document.getElementById(e.target.dataset.subject);
+                    if (sectionToShow) sectionToShow.style.display = 'grid';
+
+                    // Hide articles grid when not on home
+                    articlesContainer.style.display = e.target.dataset.subject === 'home' ? 'grid' : 'none';
+                });
+            });
+
+            function loadArticles(date) {
+                const articles = {
+                    "12.13.24": [
+                        {
+                            title: "Tech Innovations of 2024",
+                            summary: "A look at groundbreaking technologies this year.",
+                            category: "computer-science"
+                        },
+                        {
+                            title: "Climate Change Progress",
+                            summary: "Global efforts and challenges in environmental sustainability.",
+                            category: "world-politics"
+                        },
+                        {
+                            title: "AI in Healthcare",
+                            summary: "How artificial intelligence is transforming medical treatments.",
+                            category: "ai"
+                        },
+                        {
+                            title: "Space Exploration Milestones",
+                            summary: "Recent achievements in interstellar research.",
+                            category: "computer-science"
+                        }
+                    ]
+                };
+
+                // Clear previous articles
+                sections.forEach(section => section.innerHTML = '');
+                articlesContainer.innerHTML = '';
+
+                const dateArticles = articles[date] || [];
+
+                dateArticles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'bg-gray-900 rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow cursor-pointer';
+                    articleElement.innerHTML = `
+                        <h2 class="text-xl font-semibold text-white mb-2">${article.title}</h2>
+                        <p class="text-gray-400 mb-4">${article.summary}</p>
+                    `;
+                    
+                    // Add click event to show modal
+                    articleElement.addEventListener('click', () => {
+                        modalTitle.textContent = article.title;
+                        modalSummary.textContent = article.summary;
+                        articleModal.style.display = 'flex';
+                    });
+                    
+                    // Add to articles container and category section
+                    articlesContainer.appendChild(articleElement.cloneNode(true));
+                    
+                    const categorySection = document.getElementById(article.category);
+                    if (categorySection) {
+                        categorySection.appendChild(articleElement);
+                    }
+                });
+            }
+
+            // Load articles for current date by default
+            const currentDate = `${(new Date().getMonth() + 1).toString().padStart(2, '0')}.${new Date().getDate().toString().padStart(2, '0')}.${new Date().getFullYear().toString().slice(-2)}`;
+            loadArticles(currentDate);
+
+            datePicker.config.onChange.push((selectedDates, dateStr) => {
+                loadArticles(dateStr);
+            });
+        });
+    </script>
+
+    <footer class="bg-black text-white text-center py-4 border-t border-gray-800">
+        <p>&copy; 2024 Cite - Illuminating Perspectives</p>
+    </footer>
+</body>
+</html>
