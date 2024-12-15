@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const articles = document.querySelectorAll('.article');
+    const details = document.querySelectorAll('details');
     
-    articles.forEach(article => {
-        article.addEventListener('click', () => {
-            article.classList.toggle('expanded');
+    details.forEach(detail => {
+        detail.addEventListener('toggle', () => {
+            detail.classList.toggle('expanded');
         });
     });
 });
