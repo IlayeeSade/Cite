@@ -1,52 +1,93 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
-    <title>Cite - Latest AI Insights</title>
-    <link rel='stylesheet' href='styles.css'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cite - Your Global Information Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .active-nav { background-color: black; color: white; }
+        #articleModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: black;
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body>
-    <h1>Recent AI Developments</h1>
-    
-    <div class='article'>
-        <h2>Sutskever's SSI Startup Raises $1 Billion for AI Safety</h2>
-        <p>On September 4, 2024, Ilya Sutskever's new startup, Safe Systems Intelligence (SSI), secured $1 billion in funding, focusing on developing AI safety technologies. The funding highlights the critical importance of responsible AI development in mitigating potential existential risks.</p>
-        <details>
-            <summary>Key Details</summary>
-            <ul>
-                <li>Funding: $1 billion</li>
-                <li>Focus: AI safety mechanisms</li>
-                <li>Goal: Mitigate potential AI risks</li>
-            </ul>
-        </details>
+<body class="bg-black text-white font-sans">
+    <nav class="bg-black p-4 text-white flex justify-between items-center">
+        <div class="text-xl font-bold">Cite</div>
+        <div class="space-x-4">
+            <a href="#" data-subject="home" class="hover:text-gray-300 active-nav px-3 py-2 rounded">Home</a>
+            <a href="#" data-subject="world-politics" class="hover:text-gray-300 px-3 py-2 rounded">World Politics</a>
+            <a href="#" data-subject="computer-science" class="hover:text-gray-300 px-3 py-2 rounded">Computer Science</a>
+            <a href="#" data-subject="ai" class="hover:text-gray-300 px-3 py-2 rounded">AI</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Sutskever's SSI Startup</h2>
+                <p class="text-gray-300 mb-4">On September 4, 2024, Ilya Sutskever's Safe Systems Intelligence (SSI) secured $1 billion in funding, focusing on AI safety technologies.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">September 4, 2024</span>
+                    <button class="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">Read More</button>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">NeurIPS 2024 Insights</h2>
+                <p class="text-gray-300 mb-4">Sutskever argues that superintelligent AI systems will likely be fundamentally unpredictable, emphasizing the need for robust safety mechanisms.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">December 14, 2024</span>
+                    <button class="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">Read More</button>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">TIME's AI Influencers</h2>
+                <p class="text-gray-300 mb-4">Ilya Sutskever named among TIME magazine's 100 Most Influential People in AI for 2024, celebrating innovators in machine learning.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">2024 Recognition</span>
+                    <button class="bg-white text-black px-3 py-1 rounded hover:bg-gray-200">Read More</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class='article'>
-        <h2>NeurIPS 2024: Superintelligence Unpredictability</h2>
-        <p>At the NeurIPS conference on December 14, 2024, Sutskever delivered a groundbreaking talk arguing that superintelligent AI systems will likely be fundamentally unpredictable. He emphasized the need for robust safety mechanisms to manage potential unintended consequences.</p>
-        <details>
-            <summary>Conference Highlights</summary>
-            <ul>
-                <li>Main Topic: AI Predictability Challenges</li>
-                <li>Key Argument: Inherent Unpredictability of Superintelligence</li>
-                <li>Proposed Solution: Advanced Safety Frameworks</li>
-            </ul>
-        </details>
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <p id="modalContent" class="text-gray-300"></p>
+        </div>
     </div>
 
-    <div class='article'>
-        <h2>TIME's 100 Most Influential People in AI</h2>
-        <p>Recognized for his pivotal contributions to artificial intelligence, Ilya Sutskever was named among TIME magazine's 100 Most Influential People in AI for 2024. The list celebrates innovators driving transformative changes in machine learning and AI research.</p>
-        <details>
-            <summary>Recognition Details</summary>
-            <ul>
-                <li>Award: TIME's 100 Most Influential in AI</li>
-                <li>Year: 2024</li>
-                <li>Reason: Groundbreaking AI Research and Leadership</li>
-            </ul>
-        </details>
-    </div>
-
-    <script src='script.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
 </body>
 </html>
