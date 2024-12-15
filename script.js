@@ -48,26 +48,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadArticles(date) {
         const articles = {
-            "12.13.24": [
+            "12.15.24": [
+                // AI Articles
                 {
-                    title: "Tech Innovations of 2024",
-                    summary: "A look at groundbreaking technologies this year.",
-                    category: "computer-science"
-                },
-                {
-                    title: "Climate Change Progress",
-                    summary: "Global efforts and challenges in environmental sustainability.",
-                    category: "world-politics"
-                },
-                {
-                    title: "AI in Healthcare",
-                    summary: "How artificial intelligence is transforming medical treatments.",
+                    title: "Sutskever's NeurIPS Bombshell: The End of Pre-Training",
+                    summary: "OpenAI cofounder Ilya Sutskever argues current AI training methods have reached a data limit, signaling a potential paradigm shift in machine learning approaches.",
                     category: "ai"
                 },
                 {
-                    title: "Space Exploration Milestones",
-                    summary: "Recent achievements in interstellar research.",
+                    title: "AI in Healthcare: 2024 Innovation Landscape",
+                    summary: "Generative AI transforms healthcare with advanced EHR data processing, personalized treatment strategies, and breakthrough diagnostic tools.",
+                    category: "ai"
+                },
+                {
+                    title: "Ethical AI: Balancing Innovation and Responsibility",
+                    summary: "Experts discuss critical challenges in developing responsible AI systems that prioritize safety, transparency, and human-centric design.",
+                    category: "ai"
+                },
+                // Computer Science Articles
+                {
+                    title: "Quantum Computing's Leap Forward",
+                    summary: "Recent breakthroughs in quantum error correction bring practical quantum computing closer to reality, with potential revolutionary impacts.",
                     category: "computer-science"
+                },
+                {
+                    title: "Open Source AI: Democratizing Technology",
+                    summary: "The growing movement towards open-source AI models challenges big tech's dominance and promotes collaborative innovation.",
+                    category: "computer-science"
+                },
+                {
+                    title: "Cybersecurity in the AI Era",
+                    summary: "New AI-powered defense mechanisms are reshaping how organizations protect against increasingly sophisticated cyber threats.",
+                    category: "computer-science"
+                },
+                // World Politics Articles
+                {
+                    title: "Global Democracy at a Crossroads",
+                    summary: "2024 elections reveal critical challenges of misinformation, polarization, and youth political engagement worldwide.",
+                    category: "world-politics"
+                },
+                {
+                    title: "The Rise of the Global South",
+                    summary: "Emerging economies are reshaping international trade and political dynamics, challenging traditional Western-centric models.",
+                    category: "world-politics"
+                },
+                {
+                    title: "Climate Crisis: Geopolitical Tensions Escalate",
+                    summary: "Increasing global risks from climate change are intensifying international conflicts and driving urgent diplomatic negotiations.",
+                    category: "world-politics"
                 }
             ]
         };
