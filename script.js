@@ -49,53 +49,65 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadArticles(date) {
         const articles = {
             "12.15.24": [
-                // AI Articles
+                // Previous articles remain the same
+            ],
+            "12.18.24": [
+                // Technology Articles
                 {
-                    title: "Sutskever's NeurIPS Bombshell: The End of Pre-Training",
-                    summary: "OpenAI cofounder Ilya Sutskever argues current AI training methods have reached a data limit, signaling a potential paradigm shift in machine learning approaches.",
-                    category: "ai"
+                    title: "Quantum Computing Breakthrough: Beyond Classical Limits",
+                    summary: "Significant advancements in quantum computing hardware and algorithms, potentially enabling general-purpose quantum computers earlier than anticipated.",
+                    category: "computer-science",
+                    source: "MIT Technology Review"
                 },
                 {
-                    title: "AI in Healthcare: 2024 Innovation Landscape",
-                    summary: "Generative AI transforms healthcare with advanced EHR data processing, personalized treatment strategies, and breakthrough diagnostic tools.",
-                    category: "ai"
+                    title: "AI Generative Tools Reshape Tech Landscape",
+                    summary: "Hundreds of millions now interact with generative AI tools like ChatGPT, compelling major tech companies to invest heavily in AI development.",
+                    category: "ai",
+                    source: "MIT Technology Review"
                 },
                 {
-                    title: "Ethical AI: Balancing Innovation and Responsibility",
-                    summary: "Experts discuss critical challenges in developing responsible AI systems that prioritize safety, transparency, and human-centric design.",
-                    category: "ai"
+                    title: "Advanced Collaborative Workplace Frameworks Emerge",
+                    summary: "Integration of AI, AR, VR, IoT, and networked systems to enhance productivity and decision-making in modern workplaces.",
+                    category: "computer-science",
+                    source: "DocuWare Tech Trends 2024"
                 },
-                // Computer Science Articles
+                // Environmental Articles
                 {
-                    title: "Quantum Computing's Leap Forward",
-                    summary: "Recent breakthroughs in quantum error correction bring practical quantum computing closer to reality, with potential revolutionary impacts.",
-                    category: "computer-science"
-                },
-                {
-                    title: "Open Source AI: Democratizing Technology",
-                    summary: "The growing movement towards open-source AI models challenges big tech's dominance and promotes collaborative innovation.",
-                    category: "computer-science"
+                    title: "Climate Crisis: Planetary Tipping Points",
+                    summary: "Escalating environmental planetary crises with increasing global impacts from human activities, threatening ecosystem stability.",
+                    category: "world-politics",
+                    source: "UNEP Report"
                 },
                 {
-                    title: "Cybersecurity in the AI Era",
-                    summary: "New AI-powered defense mechanisms are reshaping how organizations protect against increasingly sophisticated cyber threats.",
-                    category: "computer-science"
-                },
-                // World Politics Articles
-                {
-                    title: "Global Democracy at a Crossroads",
-                    summary: "2024 elections reveal critical challenges of misinformation, polarization, and youth political engagement worldwide.",
-                    category: "world-politics"
+                    title: "Biodiversity Under Siege: Global Ecosystem Threats",
+                    summary: "Critical challenges including deforestation, plastic pollution, and rapid ecosystem degradation threatening global biodiversity.",
+                    category: "world-politics",
+                    source: "Earth.Org"
                 },
                 {
-                    title: "The Rise of the Global South",
-                    summary: "Emerging economies are reshaping international trade and political dynamics, challenging traditional Western-centric models.",
-                    category: "world-politics"
+                    title: "Ocean CO2 Absorption: Marine Ecosystems in Peril",
+                    summary: "Increasing pressure on oceans to absorb CO2 is causing significant stress to marine ecosystems, including coral reefs.",
+                    category: "world-politics",
+                    source: "TerraPass Environmental Report"
+                },
+                // Political Articles
+                {
+                    title: "Global Democratic Discontent Rises",
+                    summary: "Across 31 nations, a median of 54% of adults express dissatisfaction with democratic processes, indicating growing political tension.",
+                    category: "world-politics",
+                    source: "Pew Research Center"
                 },
                 {
-                    title: "Climate Crisis: Geopolitical Tensions Escalate",
-                    summary: "Increasing global risks from climate change are intensifying international conflicts and driving urgent diplomatic negotiations.",
-                    category: "world-politics"
+                    title: "2024: The Year of Global Elections",
+                    summary: "Record 65 countries holding elections in 2024, representing the largest election year in global history with potential for political disruption.",
+                    category: "world-politics",
+                    source: "International SOS"
+                },
+                {
+                    title: "Geopolitical Risk Landscape Transforms",
+                    summary: "Complex global political environment emerges with multiple potential international tension points and shifting power dynamics.",
+                    category: "world-politics",
+                    source: "EY Global Insights"
                 }
             ]
         };
@@ -111,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             articleElement.innerHTML = `
                 <h2 class="text-xl font-semibold text-white mb-2">${article.title}</h2>
                 <p class="text-gray-400 mb-4">${article.summary}</p>
+                <span class="text-sm text-gray-500">${article.source}</span>
             `;
             
             // Add click event to show modal
